@@ -22,7 +22,7 @@ const ExitIntentModal: React.FC<ExitIntentModalProps> = ({ onClose }) => {
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg space-y-4">
-                <h2 className="text-2xl font-rubikMonoOne mb-2">Don't Leave Yet! We Need Your Help!</h2>
+                <h2 className="text-2xl font-rubikMonoOne mb-2">Don&apos;t Leave Yet! We Need Your Help!</h2>
                 <p className="text-xl font-roboto">Stay up to date and involved by joining our mailing list.</p>
                 <input 
                     type="email" 
