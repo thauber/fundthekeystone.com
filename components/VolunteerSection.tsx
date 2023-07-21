@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { EmittedFieldObject, EmittedFieldSchema, Model } from "animal-orm";
-import Volunteer from '@/animals/volunteer'
+import Volunteer from '@/animals/Volunteer'
 import Spinner from "./Spinner";
 
 const schema = z.object({
@@ -48,12 +48,12 @@ const VolunteerSection: React.FC = () => {
                 <div className="mb-4">
                   <label className={labelClass} htmlFor="name">Name</label>
                   <input className={inputClass} id="name" type="text" {...register('name')} />
-                  {errors.name && <p className="text-red-500 text-xs italic">{errors.name.message}</p>}
+                  {errors.name && <p className="text-red-500 text-xs italic">{errors.name.message as string}</p>}
                 </div>
                 <div className="mb-4">
                   <label className={labelClass} htmlFor="email">Email</label>
                   <input className={inputClass} id="email" type="text" {...register('email')} />
-                  {errors.email && <p className="text-red-500 text-xs italic">{errors.email.message}</p>}
+                  {errors.email && <p className="text-red-500 text-xs italic">{errors.email.message as string}</p>}
                 </div>
                 <div className="mb-4">
                   <label className={labelClass} htmlFor="phone">Phone (Optional)</label>

@@ -6,9 +6,11 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ProgressSection: React.FC = ({goal, raised}:{goal:number, raised:number}) => {
+const ProgressSection: React.FC = () => {
     const [contribution, setContribution] = useState(0); // Update with the actual contribution
 
+    const raised = 5
+    const goal = 1000
     // Calculate the percentage of the goal that has been raised
     const percentageContribution = Math.round((contribution / goal) * 100);
     const percentageRaised = Math.round((raised / goal) * 100);
