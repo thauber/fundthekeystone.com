@@ -1,14 +1,61 @@
 // AboutSection.tsx
 
-import React from "react";
+import { gsap } from "gsap/dist/gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import React, { useCallback } from "react";
+
 
 const AboutSection: React.FC = () => {
-    return (
-        <section className="flex flex-col items-center justify-center p-6 text-center">
-            <h3 className="text-3xl font-rubikMonoOne mb-4">About the Project</h3>
-            <p className="text-xl font-roboto max-w-prose">Your detailed information about the project goes here...</p>
-        </section>
-    );
+  const container = useCallback((container: HTMLElement) => {
+    if (container) {
+      gsap.registerPlugin(ScrollTrigger);
+      console.log(container)
+      const backdrop = container.querySelector('.backdrop-bridge')
+      gsap.to(backdrop, {
+        filter: "blur(6px) brightness(0.5)",
+        scrollTrigger: {
+          trigger: container,
+          start: 'top 5%',
+          end: 'top top',
+          scrub: true,
+        }
+      })
+      const info = container.querySelector('.info')
+      const quote = container.querySelector('.quote')
+      gsap.to([info, quote], {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: container,
+          start: 'top 5%',
+          end: 'top top',
+          scrub: true,
+        }
+      })
+    }
+  }, []);
+
+  console.log(ScrollTrigger)
+
+  return (
+    <section ref={container} className="md:h-screen w-screen p-6 text-center md:text-left relative">
+      <div className="backdrop-bridge" />
+      <div className="w-full md:h-screen flex flex-col md:flex-row items-center justify-center">
+        <div className="info z-10 w-full md:w-1/2 bg-cool p-10 md:m-10 mx-10 my-40">
+          <h3 className="text-4xl font-rubikMonoOne mb-4 text-white">About the Project</h3>
+          <p className="text-2xl font-roboto max-w-prose text-white mb-6">
+            We are a group of passionate volunteers developing a campaign to raise money
+            to fund essential restoration of Elkader&apos;s historic keystone bridge.
+          </p><p className="text-2xl font-roboto max-w-prose text-white mb-6">
+            It is the longest archway keystone bridge west of the Mississippi and has stood in this spot for nearly 150 years. Join us in preserving this historic structure and be a part of Elkader&apos;s history.
+          </p>
+        </div>
+        <div className="quote z-10 w-full md:w-1/2 px-6 lg:m-10 lg:mx-10 my-40">
+          <p className="text-2xl lg:text-4xl max-w-prose text-bright drop-shadow-lg">The great stone arch bridge which spans the Turkey river and which was built, not for a time, but for <span className="font-bold text-4xl md:text-5xl lg:text-7xl">eternity</span></p>
+          <p className="lg:px-10 pt-4 text-gray-300 lg:text-2xl font-roboto max-w-prose uppercase font-bold">- Memoirs of Clayton County</p>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default AboutSection;

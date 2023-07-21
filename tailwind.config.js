@@ -14,8 +14,15 @@ module.exports = {
       },
       fontFamily: {
         'rubikMonoOne': ['Rubik Mono One', 'sans-serif'],
-        'roboto': ['Roboto', 'sans-serif'],
+        'roboto': ['Manrope', 'sans-serif'],
       },
+
+      colors: {
+        'bright': '#FDBD10',
+        'cool': '#1C71D4',
+        'field': '#039061',
+        'white': '#FFFFFF',
+      }
     },
   },
   plugins: [],

@@ -1,6 +1,8 @@
 // ContactSection.tsx
 
 import React, { useState } from "react";
+import FacebookIcon from "./icons/Facebook";
+import InstagramIcon from "./icons/Instagram";
 
 const ContactSection: React.FC = () => {
     const [email, setEmail] = useState("");
@@ -15,19 +17,18 @@ const ContactSection: React.FC = () => {
     };
 
     return (
-        <section className="flex flex-col items-center justify-center p-6 text-center">
-            <h3 className="text-3xl font-rubikMonoOne mb-4">Stay Informed</h3>
-            <p className="text-xl font-roboto mb-4">Sign up for our newsletter and get the latest updates on our mission to save the Elkader Keystone Bridge.</p>
-            <form onSubmit={handleSubmit} className="flex flex-col items-center">
-                <input 
-                    type="email" 
-                    value={email}
-                    onChange={handleEmailChange}
-                    placeholder="Enter your email"
-                    className="mb-4 px-2 py-1 border-2 border-blue-500 rounded-lg"
-                />
-                <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded-lg">Subscribe</button>
-            </form>
+        <section className="h-screen flex flex-col items-center justify-center p-12 text-center">
+            <h3 className="text-6xl md:text-9xl text-bright font-rubikMonoOne mb-4 w-scrren text-center">Stay Tuned</h3>
+            <p className="text-xl md:text-3xl text-white font-roboto mb-4">Keep your eye out for more of the <span className="font-bold text-bright">Fund The Keystone</span> campaign.</p>
+            <div className={`z-10 flex flex-col h-16 items-center`}>
+                <div className="flex items-center rounded justify-normal m-3 bg-bright border-field border-2 hover:border-white">
+                    <a href="https://www.gofundme.com/f/save-the-elkader-keystone-bridge" className="mx-8 my-2 text-3xl transition-all duration-200 ease-in-out text-field cursor-pointer">DONATE</a>
+                </div>
+                <div className="flex">
+                    <a href="https://facebook.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out cursor-pointer`}><FacebookIcon size={50} /></a>
+                    <a href="https://instagram.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out cursor-pointer`}><InstagramIcon size={50} /></a>
+                </div>
+            </div>
         </section>
     );
 };

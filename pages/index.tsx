@@ -24,28 +24,41 @@ export const LandingPage: React.FC = () => {
         setShowExitIntentModal(true);
     }
 
+    if (typeof window !== 'undefined') {
+      window.document.body.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        const delta = event.deltaY;
+      
+        window.document.body.scrollBy({
+          top: delta,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+
     const sections = [
       <Header key="header"/>,
-      <HeroSection key="hero"/>,
       <AboutSection key="about"/>,
-      <ProgressSection key="progress"/>,
-      <DonationSection key="donation" onClick={() => setShowDonationModal(true)} />,
       <VolunteerSection key="volnunteer" />,
-      <TestimonialSection key="testomony" />,
-      <UpdatesSection key="update" />,
       <ContactSection key="contact" />,
     ]
 
     return (
-        <div className="min-h-screen font-rubikMonoOne bg-white text-blue-700">
+        <div className="min-h-screen font-rubikMonoOne bg-field text-blue-700">
 
             <main>
 
-              {sections.map((section, index) => (
-                <div key={index} className="w-full h-screen snap-start">
-                  {section}
-                </div>
-              ))}
+              {sections.map((section, index) => {
+                let snaps = "md:snap-always md:snap-start"
+                if (index == 0) snaps = "snap-start"
+                if (index == 1) snaps = "snap-start snap-always"
+                return (
+                  <div key={index} className={`${snaps} h-full min-h-screen`}>
+                    {section}
+                  </div>
+                )
+              })}
 
             </main>
 
