@@ -1,18 +1,12 @@
 // Import necessary libraries
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 
 // Import components
 import DonationModal from "@/components/DonationModal";
 import ExitIntentModal from "@/components/ExitIntentModal";
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import ProgressSection from "@/components/ProgressSection";
-import DonationSection from "@/components/DonationSection";
 import VolunteerSection from "@/components/VolunteerSection";
-import TestimonialSection from "@/components/TestimonialSection";
-import UpdatesSection from "@/components/UpdatesSection";
 import ContactSection from "@/components/ContactSection";
 
 export const LandingPage: React.FC = () => {
