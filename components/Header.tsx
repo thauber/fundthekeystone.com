@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   }, []);
 
   // Calculate the font size and color based on scroll position
-  const fontSize = scrollY > breakpoint ? "text-sm md:text-xl" : "text-5xl md:text-8xl lg:text-9xl";
+  const fontSize = scrollY > breakpoint ? "text-sm md:text-xl" : "text-[12vw] leading-[12vw] lg:text-[14vw]  lg:leading-[14vw]";
   const bgColor = scrollY > breakpoint ? "bg-field" : "bg-transparent";
   const textColor = scrollY > breakpoint ? "text-white" : "text-bright drop-shadow-lg";
   const height = scrollY > breakpoint ? "h-16" : "h-full";
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
           <source src="/video/hero-hq.webm" type="video/mp4" />
         </video>
       </div>}
-      <div className="relative z-10 w-full break-words">
+      <div className="relative z-10 w-full break-words opacity-90">
         <h1 className={`${fontSize} font-rubikMonoOne transition-all duration-200 ease-in-out w-full`}>
           <span>Fund</span>{scrollY <= breakpoint && <br />}
           <span>The</span>{scrollY <= breakpoint && <br />}
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
         <a href="https://instagram.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out ${social} cursor-pointer`}><InstagramIcon /></a>
       </div>
       <div
-        className='absolute -mx-6 bottom-10 w-full flex justify-center animate-bounce cursor-pointer'
+        className='z-20 absolute -mx-6 bottom-6 w-full flex justify-center animate-bounce cursor-pointer'
         onClick={() => {
           const newY = window.scrollY + window.innerHeight;
           window.scrollTo({ top: newY, behavior: 'smooth' });

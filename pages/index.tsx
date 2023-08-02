@@ -25,8 +25,8 @@ export const LandingPage: React.FC = () => {
     }
 
     if (typeof window !== 'undefined') {
+      window.document.onblur = handleExitIntent;
       window.document.body.addEventListener('wheel', (event) => {
-        event.preventDefault();
         const delta = event.deltaY;
       
         window.document.body.scrollBy({
