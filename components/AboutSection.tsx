@@ -44,9 +44,9 @@ const AboutSection: React.FC = () => {
           <h3 className="text-4xl font-rubikMonoOne mb-4 text-white">About the Project</h3>
           <p className="text-2xl font-roboto max-w-prose text-white mb-6">
           We&apos;re a friendly bunch of volunteers with a shared interest in Elkader&apos;s Keystone Bridge. It&apos;s not just any bridge; it&apos;s the longest keystone archway bridge this side of the Mississippi and has been part of our town&apos;s scenery for almost 150 years.
-So, come along, be a part of this initiative and help us keep our bridge standing strong for generations to come. It&apos;s a great chance to contribute to Elkader&apos;s story in a meaningful way.
-          </p><p className="text-2xl font-roboto max-w-prose text-white mb-6">
-            It is the longest archway keystone bridge west of the Mississippi and has stood in this spot for nearly 150 years. Join us in preserving this historic structure and be a part of Elkader&apos;s history.
+          </p>
+          <p className="text-2xl font-roboto max-w-prose text-white mb-6">
+            So, come along, be a part of this initiative and help us keep our bridge standing strong for generations to come. It&apos;s a great chance to contribute to Elkader&apos;s story in a meaningful way.
           </p>
         </div>
         <div className="quote z-10 w-full md:w-1/2 px-6 lg:m-10 lg:mx-10 my-40">
