@@ -42,7 +42,7 @@ const AboutSection: React.FC = () => {
       <div className="w-full md:h-screen flex flex-col md:flex-row items-center justify-center">
         <div className="info z-10 w-full md:w-1/2 bg-cool p-10 md:m-10 mx-10 my-40">
           <h3 className="text-4xl font-rubikMonoOne mb-4 text-white">About the Project</h3>
-          <p className="text-2xl font-roboto max-w-prose text-white mb-6">
+          <p className="lg:text-lg xl:text-2xl font-roboto max-w-prose text-white mb-6">
           We&apos;re a friendly bunch of volunteers with a shared interest in Elkader&apos;s Keystone Bridge. It&apos;s not just any bridge; it&apos;s the longest keystone archway bridge this side of the Mississippi and has been part of our town&apos;s scenery for almost 150 years.
           </p>
           <p className="text-2xl font-roboto max-w-prose text-white mb-6">
