@@ -33,11 +33,13 @@ const AmountInput = ({initialValue, onChange, className}:Props) => {
     onChange(value)
   }, [setValue, setShowOptions, onChange])
 
-  const focusMobile = useCallback(() => {
-    if (!customVisible) {
+  const focusMobile = () => {
+    if (!customVisible && customMobileInput.current) {
+      if (currentValue) {
+        customMobileInput.current.value = ""+currentValue
+      }
       setTimeout(() => {
         if (customMobileInput.current) {
-          customMobileInput.current.value = ""+currentValue
           customMobileInput.current.focus()
         }
       }, 100)
@@ -48,7 +50,7 @@ const AmountInput = ({initialValue, onChange, className}:Props) => {
     }
     setShowOptions(false)
     setCustomVisible(!customVisible)
-  }, [customVisible, updateValue, setShowOptions, setCustomVisible, customMobileInput])
+  }
 
   return (
     <>
