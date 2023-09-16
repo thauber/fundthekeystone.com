@@ -1,4 +1,3 @@
-// pages/api/stripe-webhook.ts
 import Donation from '@/animals/Donation';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
@@ -14,14 +13,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (Array.isArray(checkout)) checkout = checkout[0];
     if (!checkout) return res.status(400).end();
 
-
+    // Retrieve Stripe Checkout Session to get invoiceId and subscriptionId
+    const session = await stripe.checkout.sessions.retrieve(checkout as string);
     
-    const donation = await Donation.zoo.getBy("checkoutId", checkout)
+    const invoiceId = typeof session.invoice == "string" ? session.invoice : session.invoice?.id;
+    const subscriptionId = typeof session.subscription == "string" ? session.subscription : session.subscription?.id;
+
+    const donation = await Donation.zoo.getBy("checkoutId", checkout);
     if (donation) {
-      await Donation.zoo.update(donation.id, {completedAt: new Date()})
+      await Donation.zoo.update(donation.id, {
+        completedAt: new Date(),
+        invoiceId,
+        subscriptionId
+      });
       // Acknowledge receipt of event
       const domain = process.env.DOMAIN || 'http://localhost:3000';
-      return res.redirect(`${domain}/?checkout=true`)
+      return res.redirect(`${domain}/?checkout=true`);
     }
   }
 
