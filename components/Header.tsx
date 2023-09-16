@@ -26,11 +26,11 @@ const Header = ({onDonate}:{onDonate:()=>void}) => {
   const top = scrollY > breakpoint ? "" : "top-10";
   const right = scrollY > breakpoint ? "right-2" : "right-10";
   const social = scrollY > breakpoint ? "hidden md:block" : "";
-  const donate = scrollY > breakpoint ? "mx-4 " : "text-4xl my-2 mx-8 ";
+  const donate = scrollY > breakpoint ? "mx-4 " : "text-2xl my-1 mx-4 md:text-4xl my-2 mx-8 ";
 
   return (
     <header
-      className={`z-20 w-full p-6 fixed top-0 transition-all duration-200 ease-in-out ${bgColor} ${textColor} ${height} flex justify-between items-center`}
+      className={`z-20 w-full p-4 fixed top-0 transition-all duration-200 ease-in-out ${bgColor} ${textColor} ${height} flex justify-between items-center`}
     >
       {scrollY <= breakpoint && <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <video autoPlay loop muted style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }}>
@@ -44,15 +44,15 @@ const Header = ({onDonate}:{onDonate:()=>void}) => {
           <span>Keystone</span>
         </h1>
       </div>
-      <div className={`absolute z-10 flex h-16 items-center ${top} ${right}`}>
-        <div className="flex items-center rounded justify-normal border-2 mx-1 hover:bg-bright">
-          <a onClick={onDonate} className={`${donate} transition-all duration-200 ease-in-out text-white cursor-pointer`}>DONATE</a>
+      <div className={`absolute z-10 flex h-13 items-center ${top} ${right}`}>
+        <div className="flex items-center rounded justify-normal border-2 mx-1 tempt">
+          <button type="button" onClick={onDonate} className={`${donate} transition-all duration-200 ease-in-out text-white cursor-pointer`}>DONATE</button>
         </div>
       </div>
       <div
         className='z-20 absolute -mx-6 bottom-6 w-full flex justify-center animate-bounce cursor-pointer'
         onClick={() => {
-          const newY = window.scrollY + window.innerHeight;
+          const newY = window.scrollY + window.innerHeight + 100;
           window.scrollTo({ top: newY, behavior: 'smooth' });
         }}
       >

@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
   return (
-    <Html lang="en" className="snap-y md:snap-mandatory snap-strict overflow-scroll-y" >
+    <Html lang="en" className="md:snap-y md:snap-mandatory overflow-scroll-y" >
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

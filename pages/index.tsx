@@ -56,10 +56,10 @@ export const LandingPage: React.FC = () => {
       <main>
         <DonateCollectionModal isOpen={showDonationModal} onClose={() => setShowDonationModal(false)} />
         <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
-        <div className={`snap-start h-full min-h-screen`}>
+        <div className={`md:snap-start h-full min-h-screen`}>
           <Header key="header" onDonate={()=>setShowDonationModal(true)}/>
         </div>
-        <div className={`snap-always h-full min-h-screen`}>
+        <div className={`md:snap-always md:snap-start h-full min-h-screen`}>
           <AboutSection key="about" />,
         </div>
         <div className={`md:snap-always md:snap-start h-full min-h-screen`}>
