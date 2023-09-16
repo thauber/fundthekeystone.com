@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { EmittedFieldObject, EmittedFieldSchema, Model } from "animal-orm";
-import Volunteer from '@/animals/Volunteer'
+import Volunteer from '@/animals/Donation'
 import Spinner from "./Spinner";
 
 const schema = z.object({
@@ -41,9 +41,9 @@ const VolunteerSection: React.FC = () => {
       {loading
         ? <Spinner />
         : (response
-          ? <h2 className="text-3xl font-rubikMonoOne mb-4 text-cool">Thank You for Signing Up!</h2>
+          ? <h2 className="text-3xl font-display mb-4 text-cool">Thank You for Signing Up!</h2>
           : <>
-              <h2 className="text-3xl font-rubikMonoOne mb-4 text-cool">Volunteer with us</h2>
+              <h2 className="text-3xl font-display mb-4 text-cool">Volunteer with us</h2>
               <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                 <div className="mb-4">
                   <label className={labelClass} htmlFor="name">Name</label>

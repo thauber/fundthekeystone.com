@@ -6,7 +6,7 @@ import Chevron from './icons/Chevron';
 
 const breakpoint = 100;
 
-const Header: React.FC = () => {
+const Header = ({onDonate}:{onDonate:()=>void}) => {
   const [scrollY, setScrollY] = useState<number>(0);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const Header: React.FC = () => {
   const top = scrollY > breakpoint ? "" : "top-10";
   const right = scrollY > breakpoint ? "right-2" : "right-10";
   const social = scrollY > breakpoint ? "hidden md:block" : "";
+  const donate = scrollY > breakpoint ? "mx-4 " : "text-4xl my-2 mx-8 ";
 
   return (
     <header
@@ -37,7 +38,7 @@ const Header: React.FC = () => {
         </video>
       </div>}
       <div className="relative z-10 w-full break-words opacity-90">
-        <h1 className={`${fontSize} font-rubikMonoOne transition-all duration-200 ease-in-out w-full`}>
+        <h1 className={`${fontSize} font-display transition-all duration-200 ease-in-out w-full`}>
           <span>Fund</span>{scrollY <= breakpoint && <br />}
           <span>The</span>{scrollY <= breakpoint && <br />}
           <span>Keystone</span>
@@ -45,10 +46,8 @@ const Header: React.FC = () => {
       </div>
       <div className={`absolute z-10 flex h-16 items-center ${top} ${right}`}>
         <div className="flex items-center rounded justify-normal border-2 mx-1 hover:bg-bright">
-          <a href="https://www.gofundme.com/f/save-the-elkader-keystone-bridge" className="mx-4 transition-all duration-200 ease-in-out text-white cursor-pointer">DONATE</a>
+          <a onClick={onDonate} className={`${donate} transition-all duration-200 ease-in-out text-white cursor-pointer`}>DONATE</a>
         </div>
-        <a href="https://facebook.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out ${social} cursor-pointer`}><FacebookIcon /></a>
-        <a href="https://instagram.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out ${social} cursor-pointer`}><InstagramIcon /></a>
       </div>
       <div
         className='z-20 absolute -mx-6 bottom-6 w-full flex justify-center animate-bounce cursor-pointer'

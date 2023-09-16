@@ -1,11 +1,13 @@
 // Import necessary libraries
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Import components
 import Header from "@/components/Header";
 import AboutSection from "@/components/AboutSection";
 import VolunteerSection from "@/components/VolunteerSection";
 import ContactSection from "@/components/ContactSection";
+import DonateCollectionModal from "@/components/DonateCollectionModal";
+import SuccessModal from "@/components/SuccessModal";
 
       /*
        {sections.map((section, index) => {
@@ -24,15 +26,18 @@ import ContactSection from "@/components/ContactSection";
 
 export const LandingPage: React.FC = () => {
   const [showDonationModal, setShowDonationModal] = useState(false);
-  const [showExitIntentModal, setShowExitIntentModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  // Triggers when the user shows intent to leave the page
-  const handleExitIntent = () => {
-    setShowExitIntentModal(true);
-  }
+  useEffect(() => {
+    //if checkout session is in url, show success modal
+    const urlParams = new URLSearchParams(window.location.search);
+    const session_id = urlParams.get('checkout');
+    if (session_id) {
+      setShowSuccessModal(true);
+    }
+  }, []);
 
   if (typeof window !== 'undefined') {
-    window.document.onblur = handleExitIntent;
     window.document.body.addEventListener('wheel', (event) => {
       const delta = event.deltaY;
 
@@ -45,11 +50,14 @@ export const LandingPage: React.FC = () => {
 
 
 
+
   return (
-    <div className="min-h-screen font-rubikMonoOne bg-field text-blue-700">
+    <div className="min-h-screen font-display bg-field text-blue-700">
       <main>
+        <DonateCollectionModal isOpen={showDonationModal} onClose={() => setShowDonationModal(false)} />
+        <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
         <div className={`snap-start h-full min-h-screen`}>
-          <Header key="header" />,
+          <Header key="header" onDonate={()=>setShowDonationModal(true)}/>
         </div>
         <div className={`snap-always h-full min-h-screen`}>
           <AboutSection key="about" />,
@@ -58,7 +66,7 @@ export const LandingPage: React.FC = () => {
           <VolunteerSection key="volnunteer" />,
         </div>
         <div className={`md:snap-always md:snap-start h-full min-h-screen`}>
-          <ContactSection key="contact" />,
+          <ContactSection onDonate={()=>{setShowDonationModal(true)}} key="contact" />,
         </div>
       </main>
     </div >

@@ -44,7 +44,7 @@ const ProgressSection: React.FC = () => {
 
 return (
         <section className="flex flex-col items-center justify-center p-6 text-center bg-green-500 text-white h-screen w-full relative">
-            <h3 className="text-3xl font-rubikMonoOne mb-4" ref={headerRef}>Progress</h3>
+            <h3 className="text-3xl font-display mb-4" ref={headerRef}>Progress</h3>
             <div className="w-full h-4 bg-gray-200 rounded-full relative" style={{height: '40px'}}>
                 <div ref={progressBarRef} style={{ width: `${percentageRaised}%` }} className="h-full bg-blue-500 rounded-full absolute"></div>
                 <div ref={contributionBarRef} style={{ width: `${percentageContribution}%` }} className="h-full bg-yellow-500 rounded-full absolute"></div>

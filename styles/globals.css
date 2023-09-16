@@ -46,3 +46,9 @@ body {
 .info, .quote {
   opacity: 0;
 }
+.tempt { }
+@media (hover: hover) {
+  .tempt { 
+    @apply hover:bg-bright-light;
+  }
+}

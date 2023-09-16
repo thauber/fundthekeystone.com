@@ -1,0 +1,47 @@
+{
+  "extends": "ts-node/node16/tsconfig.json",
+  "ts-node": {
+    // It is faster to skip typechecking.
+    // Remove if you want ts-node to do typechecking.
+    "transpileOnly": true,
+
+    "files": true,
+
+    "require": [
+      "tsconfig-paths/register",
+      "next",
+      "dotenv/config",
+    ],
+
+    "compilerOptions": {
+      // compilerOptions specified here will override those declared below,
+      // but *only* in ts-node.  Useful if you want ts-node and tsc to use
+      // different options with a single tsconfig.json.
+    }
+  },
+  "compilerOptions": {
+      "allowJs": true,
+      "isolatedModules": false,
+      "target": "ESNext",
+      "module": "Node16",
+       "moduleResolution": "node",
+      "esModuleInterop": true,
+      "types": [
+        "node"
+      ],
+      "paths": {
+        "@/*": [
+          "*"
+        ]
+      },
+      "skipLibCheck": true,
+  },
+  "include": [
+    "pages/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
