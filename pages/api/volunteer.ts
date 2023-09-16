@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import Volunteer from '@/animals/Donation'
+import Volunteer from '@/animals/Volunteer'
+import { Instance } from 'animal-orm'
 
 type Data = {
   name: string
@@ -8,7 +9,7 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   if (req.method == "POST") {
     const volunteerData = Volunteer.admit.parse(JSON.parse(req.body))
