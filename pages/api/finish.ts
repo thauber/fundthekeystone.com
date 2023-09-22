@@ -21,6 +21,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const donation = await Donation.zoo.getBy("checkoutId", checkout);
     if (donation) {
+      const donationData:{invoiceId?:string, subscriptionId?:string } = {}
+      if (invoiceId) donationData['invoiceId'] = invoiceId;
+      if (subscriptionId) donationData['subscriptionId'] = subscriptionId;
+
       await Donation.zoo.update(donation.id, {
         completedAt: new Date(),
         invoiceId,
@@ -28,7 +32,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       // Acknowledge receipt of event
       const domain = process.env.DOMAIN || 'http://localhost:3000';
-      return res.redirect(`${domain}/?checkout=true`);
+      res.redirect(`${domain}/?checkout=true`);
+      return
     }
   }
 

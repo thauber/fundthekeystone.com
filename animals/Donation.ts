@@ -6,7 +6,7 @@ import DateField from "./fields/DateField";
 const Donation = new Model("donations",{
   amount: new Field(z.number().positive()),
   isMonthly: new Field(z.boolean()), 
-  isAnonymous: new Field(z.boolean()),
+  isAnonymous: new Field(z.boolean(), {indexed: ['-completedAt']}),
   completedAt: new DateField.optional(),
   checkoutId: new Field(z.string(), {unique: true}),
   subscriptionId: new Field(z.string().optional(), {unique: true}),

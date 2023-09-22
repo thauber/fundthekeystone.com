@@ -68,7 +68,7 @@ const AmountInput = ({initialValue, onChange, className}:Props) => {
         <input
           ref={customInput}
           type="text"
-          className={`col-start-0 col-span-8 col-end-9 mr-2 ${customVisible ? "" : "hidden"}`}
+          className={`font-serif col-start-0 col-span-8 col-end-9 mr-2 ${customVisible ? "" : "hidden"}`}
           placeholder="Custom amount" onChange={()=>handleChange(customInput.current?.value)}
         />
         <button

@@ -58,14 +58,14 @@ const DonateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         name,
       },
     });
-    Donation.zoo.create({
+    const donation = await Donation.zoo.create({
       amount,
       isMonthly: monthly,
       isAnonymous: anonymous,
       checkoutId: session.id,
       payee: user.id,
     })
-    res.status(200).json({ id: session.id });
+    res.status(200).json({ id: session.id, donataion: donation.id, user: user.id });
   } catch (error) {
     res.status(400).json({ error: (error as Error).message });
   }
