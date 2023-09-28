@@ -1,8 +1,7 @@
 // Header.tsx
 import React, { useEffect, useState } from 'react';
-import FacebookIcon from './icons/Facebook';
-import InstagramIcon from './icons/Instagram';
 import Chevron from './icons/Chevron';
+import DonationToaster from './DonationToaster';
 
 const breakpoint = 100;
 
@@ -47,7 +46,7 @@ const Header = ({onDonate}:{onDonate:()=>void}) => {
         </h1>
       </div>
       <div className={`absolute z-10 flex h-13 items-center ${top} ${right}`}>
-        <div className="flex items-center rounded justify-normal border-2 mx-1 tempt">
+        <div className="flex items-center rounded justify-normal border-2 mx-1 tempt relative">
           <button type="button" onClick={onDonate} className={`${donate} transition-all duration-200 ease-in-out text-white cursor-pointer`}>DONATE</button>
         </div>
       </div>

@@ -4,6 +4,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { SWRConfig } from 'swr/_internal';
+import Tracked from '@/components/tracking/TrackingContext';
 
 config.autoAddCss = false;
 
@@ -23,7 +25,11 @@ export default function App({ Component, pageProps }: AppProps) {
         crossOrigin="anonymous"
       />
     </Head>
-    <Component {...pageProps} />
+    <Tracked>
+      <SWRConfig value={{ fetcher: (url: string) => fetch(url).then(res => res.json()) }}>
+        <Component {...pageProps} />
+      </SWRConfig>
+    </Tracked>
     <GA4 />
   </>
 }

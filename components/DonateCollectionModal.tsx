@@ -20,9 +20,10 @@ const DonationSchema = z.object({
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY||"");
 
 interface Props {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
   session?: string;
+  grounded?: boolean;
 }
 
 type Donation = z.infer<typeof DonationSchema>;
@@ -57,11 +58,13 @@ const ErrorComponent = ({ error, touched, className, submitted }:ErrorProps) => 
   );
 };
 
-const DonateCollectionModal = ({ isOpen, onClose, session }:Props) => {
+const DonateCollectionModal = ({ isOpen, onClose, session, grounded }:Props) => {
   const [submitted, setSubmitted] = useState(false);
   const [verified, setVerified] = useState(false);
   const [hoverMonthly, setHoverMonthly] = useState(false);
   const submit = () => { setSubmitted(true) }
+
+  if (grounded) { isOpen = true }
 
   const {
     register,
@@ -114,10 +117,10 @@ const DonateCollectionModal = ({ isOpen, onClose, session }:Props) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-backdrop" onClick={onClose} />
+    <div className={`${grounded ? 'mount' : 'modal'}`}>
+      {!grounded && <div className="modal-backdrop" onClick={onClose} />}
       {verified && <ConfettiExplosion force={0.5} duration={3000} particleCount={100} />}
-      <div className={`modal-content ${currentMonthly ? 'monthly' : (hoverMonthly ? 'monthly-hover' : '')}`}>
+      <div className={`content ${grounded ? "" : "modal-content"} ${currentMonthly ? 'monthly' : (hoverMonthly ? 'monthly-hover' : '')}`}>
         <form onSubmit={handleDonate}>
           <h2 className="title">Become a Keystone</h2>
           <div className="amounts grid grid-cols-10 gap-x-2">
@@ -205,16 +208,18 @@ const DonateCollectionModal = ({ isOpen, onClose, session }:Props) => {
           justify-content: center;
         }
 
-        .modal-content {
+        .content {
           @apply p-6 py-12 md:p-6;
           z-index: 60;
-          width: 92%;
           max-width: 745px;
           background: white;
         }
-        .modal-content.monthly {
+        .content.monthly {
           @apply outline outline-bright;
           outline-width: 12px;
+        }
+        .modal-content {
+          width: 92%;
         }
         @media (hover: hover) {
           .modal-content.monthly-hover {

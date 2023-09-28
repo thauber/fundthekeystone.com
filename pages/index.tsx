@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 
 // Import components
 import Header from "@/components/Header";
+import QuoteSection from "@/components/QuoteSection";
 import AboutSection from "@/components/AboutSection";
 import VolunteerSection from "@/components/VolunteerSection";
 import ContactSection from "@/components/ContactSection";
 import DonateCollectionModal from "@/components/DonateCollectionModal";
 import SuccessModal from "@/components/SuccessModal";
+import Footer from "@/components/Footer";
+import DonationSection from "@/components/DonationSection";
+import ShareModal from "@/components/ShareModal";
 
       /*
        {sections.map((section, index) => {
@@ -27,6 +31,7 @@ import SuccessModal from "@/components/SuccessModal";
 export const LandingPage: React.FC = () => {
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   useEffect(() => {
     //if checkout session is in url, show success modal
@@ -56,18 +61,26 @@ export const LandingPage: React.FC = () => {
       <main>
         <DonateCollectionModal isOpen={showDonationModal} onClose={() => setShowDonationModal(false)} />
         <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
-        <div className={`md:snap-start h-full min-h-screen`}>
+        <ShareModal isOpen={showShareModal} onClose={() => setShowShareModal(false)} />
+        <div className={`snap-start snap-always h-full min-h-screen`}>
           <Header key="header" onDonate={()=>setShowDonationModal(true)}/>
         </div>
-        <div className={`md:snap-always md:snap-start h-full min-h-screen`}>
-          <AboutSection key="about" />,
+        <div className={`snap-always snap-start h-full min-h-screen`}>
+          <QuoteSection key="quote" />
         </div>
-        <div className={`md:snap-always md:snap-start h-full min-h-screen`}>
-          <VolunteerSection key="volnunteer" />,
+        <div className={`snap-always snap-start h-full min-h-screen`}>
+          <AboutSection key="about" />
         </div>
-        <div className={`md:snap-always md:snap-start h-full min-h-screen`}>
-          <ContactSection onDonate={()=>{setShowDonationModal(true)}} key="contact" />,
+        <div className={`snap-always snap-start h-full min-h-screen`}>
+          <DonationSection key="donate" />
         </div>
+        <div className={`snap-always snap-start h-full min-h-screen`}>
+          <VolunteerSection onShare={()=>setShowShareModal(true)} key="volnunteer" />
+        </div>
+        <div className={`snap-always snap-start h-full min-h-screen`}>
+          <ContactSection onDonate={()=>{setShowDonationModal(true)}} key="contact" />
+        </div>
+        <Footer className="hidden md:block fixed bottom-0 left-0"/>
       </main>
     </div >
   );

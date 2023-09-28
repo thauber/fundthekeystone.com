@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import FacebookIcon from "./icons/Facebook";
 import InstagramIcon from "./icons/Instagram";
+import Footer from "./Footer";
 
 const ContactSection = ({onDonate}:{onDonate:()=>void}) => {
     const [email, setEmail] = useState("");
@@ -29,6 +30,7 @@ const ContactSection = ({onDonate}:{onDonate:()=>void}) => {
                     <a href="https://instagram.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out cursor-pointer`}><InstagramIcon size={50} /></a>
                 </div>
             </div>
+            <Footer className="md:hidden text-center flex w-full justify-center" />
         </section>
     );
 };

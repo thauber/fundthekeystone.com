@@ -27,11 +27,18 @@ body {
 }
 
 .backdrop-bridge {
+  background-image: url('/images/Bridge-Keystone-Placement.webp');
+}
+
+.backdrop-repair {
+  background-image: url('/images/BridgeCon1.jpg');
+}
+
+.backdrop {
   top: 0px;
   left: 0px;
   right: 0px;
   z-index: 0;
-  background-image: url('/images/Bridge-Keystone-Placement.webp');
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
@@ -39,11 +46,10 @@ body {
   width: 100%;
   height: 100%;
   filter: blur(0px) brightness(1);
-  scroll-snap-align: center;
   background-attachment: initial;
 }
 
-.info, .quote {
+.quote {
   opacity: 0;
 }
 .tempt { }
