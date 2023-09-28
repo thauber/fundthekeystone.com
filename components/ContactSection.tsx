@@ -18,7 +18,7 @@ const ContactSection = ({onDonate}:{onDonate:()=>void}) => {
     };
 
     return (
-        <section className="h-screen flex flex-col items-center justify-center p-12 text-center">
+        <section className="h-screen flex flex-col items-center justify-center p-12 text-center relative">
             <h3 className="text-6xl md:text-9xl text-bright font-display mb-4 w-scrren text-center">Stay Tuned</h3>
             <p className="text-xl md:text-3xl text-white font-roboto mb-4">Keep your eye out for more of the <span className="font-bold text-bright">Fund The Keystone</span> campaign.</p>
             <div className={`z-10 flex flex-col h-16 items-center`}>
@@ -30,7 +30,7 @@ const ContactSection = ({onDonate}:{onDonate:()=>void}) => {
                     <a href="https://instagram.com/fundthekeystone" className={`mx-1 transition-all duration-200 ease-in-out cursor-pointer`}><InstagramIcon size={50} /></a>
                 </div>
             </div>
-            <Footer className="md:hidden text-center flex w-full justify-center" />
+            <Footer className="md:hidden text-center flex w-full justify-center bottom-0 absolute" />
         </section>
     );
 };

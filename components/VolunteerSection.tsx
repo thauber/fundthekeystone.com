@@ -38,7 +38,7 @@ const VolunteerSection = ({onShare}:{onShare:()=>void}) => {
 
   return (
     <section className="relative p-6 text-left min-h-screen w-full pt-28 bg-cool">
-      <div className="text-white text-4xl md:text-6xl text-center">
+      <div className="text-white text-2xl sm:text-4xl md:text-6xl text-center">
         Help us in <span className="whitespace-nowrap">other ways</span>
       </div>
       <div className="flex items-start justify-center flex-wrap">
