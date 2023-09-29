@@ -4,12 +4,12 @@ import { Model, ModelFieldSet } from 'animal-orm'; // Replace with the actual im
 class AnimalHandler<M extends ModelFieldSet>  {
   private animal: Model<M>;
   private idKey: string;
-  private index: string;
+  private index: string | null;
 
   constructor(animal: Model<M>, {idKey, index}:{idKey?: string, index?: string}) {
     this.animal = animal;
     this.idKey = idKey || 'id';
-    this.index = index;
+    this.index = index || null;
   }
 
   async getAll(req: NextApiRequest, res: NextApiResponse) {

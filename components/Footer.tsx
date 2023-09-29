@@ -22,7 +22,7 @@ const Footer = ({className}:{className?:string}) => {
           <p className="text-6xl flex-grow py-4">Who are we?</p><button onClick={()=>setShowAbout(false)}><CloseIcon /></button>
         </div>
         <p>
-          We're a friendly bunch of volunteers with a shared passion for Elkader's historic Keystone Bridge. 
+          We&apos;re a friendly bunch of volunteers with a shared passion for Elkader&apos;s historic Keystone Bridge. 
         </p>
         <div className='w-full max-w-2/3 grid grid-cols-2 md:grid-cols-4 items-center justify-around py-10'>
           {[
