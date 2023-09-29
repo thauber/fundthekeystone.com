@@ -62,22 +62,22 @@ export const LandingPage: React.FC = () => {
         <DonateCollectionModal isOpen={showDonationModal} onClose={() => setShowDonationModal(false)} />
         <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
         <ShareModal isOpen={showShareModal} onClose={() => setShowShareModal(false)} />
-        <div className={`snap-start snap-always h-full min-h-screen`}>
+        <div className={`overflow-hidden snap-start snap-always h-full min-h-screen`}>
           <Header key="header" onDonate={()=>setShowDonationModal(true)}/>
         </div>
-        <div className={`snap-always snap-start h-full min-h-screen`}>
+        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
           <QuoteSection key="quote" />
         </div>
-        <div className={`snap-always snap-start h-full min-h-screen`}>
+        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
           <AboutSection key="about" />
         </div>
-        <div className={`snap-always snap-start h-full min-h-screen`}>
+        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
           <DonationSection key="donate" />
         </div>
-        <div className={`snap-always snap-start h-full min-h-screen`}>
+        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
           <VolunteerSection onShare={()=>setShowShareModal(true)} key="volnunteer" />
         </div>
-        <div className={`snap-always snap-start h-full min-h-screen`}>
+        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
           <ContactSection onDonate={()=>{setShowDonationModal(true)}} key="contact" />
         </div>
         <Footer className="hidden md:block fixed bottom-0 left-0"/>
