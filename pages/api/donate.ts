@@ -12,7 +12,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
 
 type Price = {
   currency: string,
-  product_data: { name: string, images: string[] },
+  product_data: { name: string, images?: string[] },
   unit_amount: number,
   recurring?: { interval: "month" }
 }
@@ -20,17 +20,27 @@ type Price = {
 const DonateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { amount, monthly, name, email, anonymous } = req.body;
 
+  const preFee = parseInt(amount) * 100
+  const fee = Math.round((preFee + 30)/.971) - preFee
   const price:Price = {
     currency: 'usd',
     product_data: {
       name: 'Keystone Bridge Donation',
       images: ['https://fundthekeystone.com/images/Bridge-Keystone-Placement.jpeg'],
     },
-    unit_amount: parseInt(amount) * 100,
+    unit_amount: preFee,
+  }
+  const feePrice:Price = {
+    currency: 'usd',
+    product_data: {
+      name: 'Processing Fee',
+    },
+    unit_amount: fee,
   }
 
   if (monthly) {
     price['recurring'] = {interval: 'month'}
+    feePrice['recurring'] = {interval: 'month'}
   }
 
   try {
@@ -46,7 +56,10 @@ const DonateHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       line_items: [{
           price_data: price,
           quantity: 1,
-        }
+        }, {
+          price_data: feePrice,
+          quantity: 1,
+        },
       ],
       mode: monthly ? 'subscription' : 'payment',
       success_url: `${domain}/api/finish?checkout={CHECKOUT_SESSION_ID}`,

@@ -1,11 +1,14 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import {isMobile} from 'react-device-detect';
+import { useEffect, useState } from 'react';
 
 export default function Document() {
-  let snapClass = "snap-y snap-proximity md:snap-mandatory snap-always overflow-scroll-y"
-  if (isMobile) {
-    snapClass = ""
-  }
+  const [snapClass, setSnapClass] = useState<string>("snap-y snap-proximity md:snap-mandatory snap-always")
+  useEffect(() => {
+    import('react-device-detect').then(({isMobile}) => {
+      if (!isMobile) setSnapClass("")
+    });
+  }, [])
+
   return (
     <Html lang="en" className={`${snapClass} overflow-y-scroll`}>
       <Head>

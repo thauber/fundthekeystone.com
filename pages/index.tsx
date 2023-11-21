@@ -1,6 +1,5 @@
 // Import necessary libraries
-import React, { use, useCallback, useEffect, useRef, useState } from "react";
-import {isMobile} from 'react-device-detect';
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 // Import components
 import Header from "@/components/Header";
@@ -35,7 +34,6 @@ const useScrollMomentumStop = (callback:(scrollY:number, isUp:boolean)=>void, de
 
     const isScrollingStopped = useCallback((currentScroll:number) => {
         const isUp = currentScroll < penultimateScroll.current
-        console.log("CALLING BACK", currentScroll, isUp)
         if (currentScroll === lastScroll.current) {
             callback(currentScroll, isUp);
         } else {
@@ -80,20 +78,23 @@ export const LandingPage: React.FC = () => {
   }, []);
 
   useScrollMomentumStop((scrollY, isUp) => {
-    if(scrollY < window.innerHeight && isMobile) {
-      if (isUp) {
-        window.scrollTo({ top: 0, behavior: "instant"});
-      } else {
-        window.scrollTo({ top: window.innerHeight, behavior: "instant"});
+    import('react-device-detect').then(({isMobile}) => {
+      if(scrollY < window.innerHeight && isMobile) {
+        if (isUp) {
+          window.scrollTo({ top: 0, behavior: "instant"});
+        } else {
+          window.scrollTo({ top: window.innerHeight, behavior: "instant"});
+        }
       }
-    }
-
+    });
   }, 150);
 
-  let snapClass = "snap-always snap-start"
-  if (isMobile) {
-    snapClass = "no-snap"
-  }
+  const [snapClass, setSnapClass] = useState<string>("no-snap")
+  useEffect(() => {
+    import('react-device-detect').then(({isMobile}) => {
+      if (!isMobile) setSnapClass("snap-always snap-start")
+    });
+  }, [])
 
   return (
     <div className="min-h-screen font-display bg-field text-blue-700">
