@@ -5,7 +5,7 @@ export default function Document() {
   const [snapClass, setSnapClass] = useState<string>("snap-y snap-proximity md:snap-mandatory snap-always")
   useEffect(() => {
     import('react-device-detect').then(({isMobile}) => {
-      if (!isMobile) setSnapClass("")
+      if (isMobile) setSnapClass("")
     });
   }, [])
 
