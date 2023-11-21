@@ -1,5 +1,6 @@
 // Import necessary libraries
-import React, { useEffect, useState } from "react";
+import React, { use, useCallback, useEffect, useRef, useState } from "react";
+import {isMobile} from 'react-device-detect';
 
 // Import components
 import Header from "@/components/Header";
@@ -28,6 +29,42 @@ import ShareModal from "@/components/ShareModal";
     { showExitIntentModal && <ExitIntentModal onClose={() => setShowExitIntentModal(false)} /> }
       */
 
+const useScrollMomentumStop = (callback:(scrollY:number, isUp:boolean)=>void, delay = 150) => {
+    const penultimateScroll = useRef(0);
+    const lastScroll = useRef(0);
+
+    const isScrollingStopped = useCallback((currentScroll:number) => {
+        const isUp = currentScroll < penultimateScroll.current
+        console.log("CALLING BACK", currentScroll, isUp)
+        if (currentScroll === lastScroll.current) {
+            callback(currentScroll, isUp);
+        } else {
+        }
+    }, [lastScroll, callback, penultimateScroll]);
+
+    // const penultimateScroll = useRef(0);
+    // const ultimateScroll = useRef(0);
+
+    useEffect(() => {
+        let timer:NodeJS.Timeout;
+        const handleScroll = () => {
+            const currentScroll = window.scrollY;
+            clearTimeout(timer);
+            penultimateScroll.current = lastScroll.current;
+            lastScroll.current = currentScroll;
+            timer = setTimeout(()=>isScrollingStopped(currentScroll), delay);
+        };
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(timer);
+        };
+    }, [delay, isScrollingStopped]);
+
+    return null;
+};
+
 export const LandingPage: React.FC = () => {
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -42,19 +79,21 @@ export const LandingPage: React.FC = () => {
     }
   }, []);
 
-  if (typeof window !== 'undefined') {
-    window.document.body.addEventListener('wheel', (event) => {
-      const delta = event.deltaY;
+  useScrollMomentumStop((scrollY, isUp) => {
+    if(scrollY < window.innerHeight) {
+      if (isUp) {
+        window.scrollTo({ top: 0, behavior: "instant"});
+      } else {
+        window.scrollTo({ top: window.innerHeight, behavior: "instant"});
+      }
+    }
 
-      window.document.body.scrollBy({
-        top: delta,
-        behavior: 'smooth'
-      });
-    });
+  }, 150);
+
+  let snapClass = "snap-always snap-start"
+  if (isMobile) {
+    snapClass = "no-snap"
   }
-
-
-
 
   return (
     <div className="min-h-screen font-display bg-field text-blue-700">
@@ -62,22 +101,22 @@ export const LandingPage: React.FC = () => {
         <DonateCollectionModal isOpen={showDonationModal} onClose={() => setShowDonationModal(false)} />
         <SuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
         <ShareModal isOpen={showShareModal} onClose={() => setShowShareModal(false)} />
-        <div className={`overflow-hidden snap-start snap-always h-full min-h-screen`}>
+        <div className={`${snapClass} overflow-hidden h-full min-h-screen`}>
           <Header key="header" onDonate={()=>setShowDonationModal(true)}/>
         </div>
-        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
+        <div className={`${snapClass} overflow-hidden h-full min-h-screen`}>
           <QuoteSection key="quote" />
         </div>
-        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
+        <div className={`${snapClass} overflow-hidden h-full min-h-screen`}>
           <AboutSection key="about" />
         </div>
-        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
+        <div className={`${snapClass} overflow-hidden h-full min-h-screen`}>
           <DonationSection key="donate" />
         </div>
-        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
+        <div className={`${snapClass} overflow-hidden h-full min-h-screen`}>
           <VolunteerSection onShare={()=>setShowShareModal(true)} key="volnunteer" />
         </div>
-        <div className={`overflow-hidden snap-always snap-start h-full min-h-screen`}>
+        <div className={`${snapClass} overflow-hidden h-full min-h-screen`}>
           <ContactSection onDonate={()=>{setShowDonationModal(true)}} key="contact" />
         </div>
         <Footer className="hidden md:block fixed bottom-0 left-0"/>
