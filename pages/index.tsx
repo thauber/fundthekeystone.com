@@ -80,7 +80,7 @@ export const LandingPage: React.FC = () => {
   }, []);
 
   useScrollMomentumStop((scrollY, isUp) => {
-    if(scrollY < window.innerHeight) {
+    if(scrollY < window.innerHeight && isMobile) {
       if (isUp) {
         window.scrollTo({ top: 0, behavior: "instant"});
       } else {
